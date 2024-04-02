@@ -28,6 +28,7 @@ namespace wNget
         {
             if (opts.url != null)
             {
+                Console.WriteLine("Press CTRL+C to exit");
                 if (opts.iteration == -1)
                 {
                     while (true)
