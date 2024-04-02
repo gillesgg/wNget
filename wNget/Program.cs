@@ -42,6 +42,7 @@ namespace wNget
                     {
                         processQuery(opts);
                     }
+                    Environment.Exit(0);
                 }
             }
 
