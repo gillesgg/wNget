@@ -55,7 +55,7 @@ namespace wNget
         }
         static void HandleParseError(IEnumerable<Error> errs)
         {
-            //handle errors
+            Environment.Exit(0);
         }
     }
 }
