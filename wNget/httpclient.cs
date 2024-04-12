@@ -49,7 +49,7 @@ namespace wNget
             _client = new HttpClient(pollyHandler);
             _verbose = verbose;
         }
-        public async Task<bool> getAsync()
+        public async Task<int> getAsync()
         {
             try
             {
@@ -79,13 +79,15 @@ namespace wNget
             catch (System.Net.Http.HttpRequestException httpex)
             {
                 log.Error(ExceptionFormatterExtension.GetDump(httpex));
+                return httpex.HResult;
             }
 
             catch (Exception ex)
             {
                 log.Error(ExceptionFormatterExtension.GetDump(ex));
+                return ex.HResult;
             }
-            return true;
+            return 0;
         }
     }
 }

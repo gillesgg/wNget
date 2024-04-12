@@ -28,16 +28,23 @@ namespace wNget
         {
             if (opts.url != null)
             {
-                Console.WriteLine("Press CTRL+C to exit");
+                
                 if (opts.iteration == -1)
                 {
+                    Console.WriteLine("Press CTRL+C to exit");
                     while (true)
                     {
                         processQuery(opts);
                     }
                 }
+                else if (opts.iteration == 0)
+                {
+                    opts.iterationTime = 0;
+                    processQuery(opts);
+                }
                 else
                 {
+                    Console.WriteLine("Press CTRL+C to exit");
                     for (var x = 0; x < opts.iteration; x++)
                     {
                         processQuery(opts);
@@ -51,7 +58,10 @@ namespace wNget
         {
             httpclient httpclient = new httpclient(opts.url, opts.Retry, opts.RetryTimeOut, opts.Verbose);
             var response = httpclient.getAsync();
-            Thread.Sleep(opts.iterationTime);
+            if (opts.iterationTime > 0 )
+                Thread.Sleep(opts.iterationTime);
+
+            Environment.Exit(response.Result);
         }
         static void HandleParseError(IEnumerable<Error> errs)
         {
